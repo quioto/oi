@@ -4,6 +4,8 @@ from janela_comprador import Janela_comprador
 from janela_vendedor import Janela_vendedor
 from janela_carros import Janela_carros
 from janela_venda import Janela_venda
+from notafiscal import Janela_Nota_Venda
+
 
 
 class Janela_principal(Tk):
@@ -11,11 +13,11 @@ class Janela_principal(Tk):
         self.control = control
         super().__init__()
         self.title('Concessionária')
-        self.geometry('200x200+200+200')
-        Label(self, text='Concessionária do JP').grid(row=0, column=0, pady=5, columnspan=10, stick=N)
+        self.geometry('350x200+200+200')
+        Label(self, text='Concessionária do JP').grid(row=0, column=0, pady=5, columnspan=20, stick=N)
 
         self.btn_close = Button(self, width=10, text='Sair', command=self.destroy).\
-            grid(row=200, column=5, padx=10, columnspan=10, pady=5, stick=S)
+            grid(row=500, column=5, padx=10, columnspan=10, pady=90, stick=S)
 
         self.grid_rowconfigure(0, weight=0)
         self.grid_rowconfigure(2, weight=0)
@@ -37,7 +39,7 @@ class Janela_principal(Tk):
         self.carregar_carros()
 
     def carregar_carros(self):
-        r = 3
+        r = 2
         c = 0
         for asd in self.control.bd.show_carros():
             Button(self, width=10, text=f'{asd.get_placa()}', command=lambda carro=asd: self.
@@ -46,10 +48,13 @@ class Janela_principal(Tk):
             if c == 4:
                 c = 0
                 r += 1
+    def atualizar(self):
+        for c in self.grid_slaves():
+            if type(c) is Button:
+                if c['text'] != 'Sair':
+                    c.destroy()
+        self.carregar_carros()
 
-    def destroy(self):
-        if messagebox.askyesno('Sair', 'Tem certeza de que deseja sair?'):
-            super().destroy()
 
     def janela_comprador(self):
         Janela_comprador(self, self.control)
@@ -62,3 +67,10 @@ class Janela_principal(Tk):
 
     def janela_venda(self, carro):
         Janela_venda(self, self.control, carro)
+    def janela_nota(self):
+        Janela_Nota_Venda(self, self.control)
+
+    def destroy(self):
+        if messagebox.askyesno('Sair', 'Tem certeza de que deseja sair?'):
+            self.control.jn.atualizar()
+            super().destroy()

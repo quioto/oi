@@ -3,7 +3,7 @@ from tkinter import messagebox
 from janela_comprador import Janela_comprador
 from janela_vendedor import Janela_vendedor
 from janela_carros import Janela_carros
-from janela_nome import Janela_nome
+from janela_3 import Janela_nome
 class Janela_principal(Tk):
     def __init__(self, control):
         self.control = control
@@ -49,3 +49,9 @@ class Janela_principal(Tk):
 
     def janela_carros(self):
         Janela_Carros(self)
+    def atualizar_patio(self):
+        for c in self.grid_slaves():
+            if type(c) is Button:
+                if c['text'] != 'Sair':
+                    c.destroy()
+        self.carregar_carros()

@@ -9,5 +9,6 @@ class Controle:
         self.bd.text_carros()
         self.bd.text_compradores()
         self.bd.text_vendedores()
+        self.bd.text_vendas()
         self.jn = Janela_principal(self)
         self.jn.mainloop()

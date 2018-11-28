@@ -49,7 +49,7 @@ class Janela_comprador(Toplevel):
                 if messagebox.askyesno\
                             ('Excluir', f'Tem ceteza que deseja excluir o comprador {comp.get_nome()}?') is False:
                     return None
-                rmvd = self.control.bd.rmv_comp(comp)
+                rmvd = self.control.bd.remove_comp(comp)
                 messagebox.showinfo('Comprador', f'{comp.get_nome()} foi removido.')
         if rmvd is None:
             messagebox.showerror('Comprador', 'Não há comprador cadastrado neste CPF')

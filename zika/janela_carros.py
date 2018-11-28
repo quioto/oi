@@ -76,7 +76,7 @@ class Janela_carros(Toplevel):
         estado = self.entry_estado_var.get()
         placa = self.entry_placa_var.get()
         # data_compra = self.entry_data_compra_var.get()
-        c = Carro(modelo, marca, ano, estado, preco, placa,)
+        c = Carro(modelo, marca, ano, estado, preco, placa)
         self.control.bd.adc_carro(c)
         messagebox.showinfo('Carro', f'{placa} foi adicionado.')
 
@@ -94,7 +94,7 @@ class Janela_carros(Toplevel):
 
     def destroy(self):
         self.control.bd.salv_carro()
-
+        self.control.jn.atualizar()
         super().destroy()
 
 
